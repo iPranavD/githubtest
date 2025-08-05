@@ -119,7 +119,7 @@ void defaultAuton() {
     chassis.turnToHeading(180, 2000); // turn toward match load at 180 so that it consistently gets the balls
     chassis.moveToPoint(33.8, -3, 3000); // go into matchload
     pros::delay(750); //wait so that we can get 3 balls
-    chassis.moveToPoint(33.8, 10, 2000); // PROBLEM!!!!!! supposed to just move back out of the matchload, but is turning 90 deg for some reason
+    chassis.moveToPoint(33.8, 10, 2000, {forwards=false}); // PROBLEM!!!!!! supposed to just move back out of the matchload, but is turning 90 deg for some reason
     pros::delay(1500);
     scraper.set_value(false);
     chassis.turnToHeading(0, 1000); //turn toward high goal
