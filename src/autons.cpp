@@ -99,6 +99,7 @@ void skillsAuton() {
  * Default autonomous routine (same as original)
  */
 void defaultAuton() {
+    chassis.setPose(0, 0, 0);
     printf("Starting Default Autonomous\n");
     
     // Set color mode for red alliance (change as needed)
@@ -107,19 +108,24 @@ void defaultAuton() {
     // Start intake with color sorting
     setIntakeTop();
     
-    chassis.moveToPose(17, 29, 90, 3000);
-    
-    chassis.turnToHeading(135, 2000);
-    chassis.moveToPoint(31, 15, 3000);
-    /*chassis.turnToHeading(180, 2000);
+    chassis.moveToPose(10, 29, 90, 3000); //first movement, going towards the 3 stack of balls
+    pros::delay(2000); //waiting so that all the balls are intaked
+    chassis.turnToHeading(135, 2000); //turn towards the scraper area
+    setIdle();           //
+    pros::delay(150);    // Make sure that balls aren't jammed (temp)
+    setIntakeTop();      //
+    chassis.moveToPoint(32, 17, 3000); // go to the place before the tube
     scraper.set_value(true);
-    chassis.moveToPoint(39, 0, 2000);xddd
-    pros::delay(2500);
+    chassis.turnToHeading(180, 2000); // turn toward match load at 180 so that it consistently gets the balls
+    chassis.moveToPoint(33.8, -3, 3000); // go into matchload
+    pros::delay(750); //wait so that we can get 3 balls
+    chassis.moveToPoint(33.8, 10, 2000); // PROBLEM!!!!!! supposed to just move back out of the matchload, but is turning 90 deg for some reason
+    pros::delay(1500);
     scraper.set_value(false);
-    chassis.moveToPoint(39, 5, 2000);*/
-    chassis.turnToHeading(0, 2000);
-    chassis.moveToPoint(31, 28, 2000);
-    setHighScoring();
+    chassis.turnToHeading(0, 1000); //turn toward high goal
+    pros::delay(800);  
+    chassis.moveToPoint(33.8, 33.5, 2000); //move toward high goal
+    setHighScoring(); //start high goal scoring
   
     
     printf("Default Autonomous Complete\n");
