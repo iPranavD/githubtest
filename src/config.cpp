@@ -4,24 +4,23 @@
 pros::Controller controller(pros::E_CONTROLLER_MASTER);
 
 // Drivetrain motors
-pros::MotorGroup rightMotors({15, 16, -17}, pros::MotorGearset::blue);
-pros::MotorGroup leftMotors({-18, -19, 20}, pros::MotorGearset::blue);
+pros::MotorGroup rightMotors({11, -12, -13}, pros::MotorGearset::blue);
+pros::MotorGroup leftMotors({-14, 15, 16}, pros::MotorGearset::blue);
 
 // Indexing/intake motors
-pros::Motor backroller(-14, pros::MotorGearset::green);
-pros::Motor midrollers(-13, pros::MotorGearset::green);
-pros::Motor bottomrollers(12, pros::MotorGearset::blue);
+pros::Motor toprollers(-10, pros::MotorGearset::blue);
+pros::Motor midrollers(-13, pros::MotorGearset::blue);
+pros::Motor bottomrollers(17, pros::MotorGearset::blue);
 
 // Sensors
-pros::Optical optical1(9);   // First optical sensor
-pros::Optical optical2(10);  // Second optical sensor
-pros::Optical optical3(21);  // Third optical sensor - change port as needed
-pros::Imu imu(8);
+
+pros::Imu imu(10);
+pros::Distance dist(6);
 pros::adi::DigitalOut basket(1);
-pros::adi::DigitalOut scraper(2);
-pros::adi::DigitalOut lower_basket(3);
-pros::adi::DigitalOut instapark(4);
-pros::adi::DigitalOut blocker(5);
+pros::adi::DigitalOut scraper(5);
+pros::adi::DigitalOut lower_basket(2);
+pros::adi::DigitalOut instapark(3);
+pros::adi::DigitalOut mid_scoring(4);
 
 // Drivetrain settings
 lemlib::Drivetrain drivetrain(&leftMotors, // left motor group
@@ -33,15 +32,15 @@ lemlib::Drivetrain drivetrain(&leftMotors, // left motor group
 );
 
 // Lateral motion controller
-lemlib::ControllerSettings linearController(10, // proportional gain (kP)
+lemlib::ControllerSettings linearController(15, // proportional gain (kP)
                                             0, // integral gain (kI)
-                                            3, // derivative gain (kD)
+                                            4, // derivative gain (kD)
                                             3, // anti windup
                                             1, // small error range, in inches
                                             100, // small error range timeout, in milliseconds
                                             3, // large error range, in inches
                                             500, // large error range timeout, in milliseconds
-                                            20 // maximum acceleration (slew)
+                                            40 // maximum acceleration (slew)
 );
 
 // Angular motion controller
@@ -99,9 +98,6 @@ void initializeHardware() {
     chassis.calibrate(); // calibrate sensors
     
     // Initialize optical sensors
-    optical1.set_led_pwm(100);
-    optical2.set_led_pwm(100);
-    optical3.set_led_pwm(100);
     
     printf("Hardware initialization complete\n");
 }

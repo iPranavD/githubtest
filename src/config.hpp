@@ -12,7 +12,7 @@ extern pros::MotorGroup rightMotors;
 extern pros::MotorGroup leftMotors;
 
 // Individual motors
-extern pros::Motor backroller;
+extern pros::Motor toprollers;
 extern pros::Motor midrollers;
 extern pros::Motor bottomrollers;
 
@@ -21,13 +21,14 @@ extern pros::Optical optical1;
 extern pros::Optical optical2;
 extern pros::Optical optical3;
 extern pros::Imu imu;
+extern pros::Distance dist;
 
 // Pneumatics
 extern pros::adi::DigitalOut basket;
 extern pros::adi::DigitalOut scraper;
 extern pros::adi::DigitalOut lower_basket;
 extern pros::adi::DigitalOut instapark;
-extern pros::adi::DigitalOut blocker;
+extern pros::adi::DigitalOut mid_scoring;
 
 // LemLib chassis
 extern lemlib::Chassis chassis;

@@ -14,9 +14,8 @@
 void initialize() {
     // Initialize hardware
     initializeHardware();
-    
     // Initialize color sorting system
-    initializeColorSorting();
+    
 
     printf("Robot initialization complete\n");
 
@@ -51,11 +50,11 @@ void competition_initialize() {
  * Runs during autonomous period
  */
 void autonomous() {
-    
+    mid_scoring.set_value(false);
     //defaultAuton();
-    deuxauto();
+    //deuxauto();
     // Alternative: use different autons 
-    // redSideAuton();
+    //redSideAuton();
     // blueSideAuton();
     // skillsAuton();
 }
@@ -68,16 +67,13 @@ void opcontrol() {
     
     // Loop forever
     while (true) {
-        const int linear_power = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
-        const int lateral_power = controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
-        chassis.arcade(linear_power, lateral_power);
+        bool park_toggle = false;
+        bool mid_toggle = true;
+        const int lateral_power = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y); 
+        const int linear_power = controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X); 
+        chassis.arcade(lateral_power, linear_power);
 
         // Basket toggle 
-        if (basket_toggle) {
-            basket.set_value(true);    
-        } else {
-            basket.set_value(false);
-        }
         
         // Intake controls with color sorting 
         if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
@@ -85,6 +81,7 @@ void opcontrol() {
         }
         else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
             setMidScoring();
+            mid_scoring.set_value(false);
         }
         else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
             setHighScoring();
@@ -92,53 +89,41 @@ void opcontrol() {
         else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
             setLowScoring();
         }
-        else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y)){
-            bottomrollers.move_velocity(600);      
-            midrollers.move_velocity(600);         
-            backroller.move_velocity(600);
-        }
         else {
             setIdle();
+            mid_scoring.set_value(true);
         }
         
-        // Color mode toggle
-        if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_UP)) {
-            toggleColorMode();
-        }
-        
-        
-        if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)) {
-            lower_toggle = !lower_toggle;
-        }
-        
-        if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
-            basket_toggle = !basket_toggle;
-        }
-        
-        if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_DOWN)) {
-            scraper_toggle = !scraper_toggle;
-        }
-        
-        if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)){
+
+        if(park_toggle){
             instapark.set_value(true);
         }
-        
-        
-        if (scraper_toggle) {
-            scraper.set_value(true);
-        } else {
-            scraper.set_value(false);
+        else{
+            instapark.set_value(false);
         }
-        
-        if (lower_toggle) {
-            lower_basket.set_value(true);
-        } else {
-            lower_basket.set_value(false);
+        if(mid_toggle){
+            mid_scoring.set_value(false);
         }
-
-        // Update color sorting system
-        updateColorSorting();
-
+        else{
+            mid_scoring.set_value(true);
+        }
+        if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_A)){
+            mid_toggle = !mid_toggle;
+            pros::delay(20);
+        }
+        if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_B)){
+            while(dist.get() > 170){
+                bottomrollers.move_velocity(-450.);
+                toprollers.move_velocity(-150);
+            }
+            pros::delay(95);
+            instapark.set_value(true);
+            bottomrollers.move_velocity(0);
+            toprollers.move_velocity(0);
+            pros::delay(100000);
+        }
+    
+        // Color mode toggle
         // Delay to save resources
         pros::delay(25);
     }
