@@ -50,7 +50,6 @@ void competition_initialize() {
  * Runs during autonomous period
  */
 void autonomous() {
-    mid_scoring.set_value(false);
     //defaultAuton();
     //deuxauto();
     // Alternative: use different autons 
@@ -68,9 +67,8 @@ void opcontrol() {
     // Loop forever
     while (true) {
         bool park_toggle = false;
-        bool mid_toggle = true;
         const int lateral_power = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y); 
-        const int linear_power = controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X); 
+        const int linear_power = 0 - controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X); 
         chassis.arcade(lateral_power, linear_power);
 
         // Basket toggle 
@@ -78,20 +76,22 @@ void opcontrol() {
         // Intake controls with color sorting 
         if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
             setIntakeTop();
+                            mid_scoring.set_value(false);
         }
         else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
             setMidScoring();
-            mid_scoring.set_value(false);
+                                    mid_scoring.set_value(false);
         }
         else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
             setHighScoring();
+                    mid_scoring.set_value(true);
         }
         else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
             setLowScoring();
+                                    mid_scoring.set_value(false);
         }
         else {
             setIdle();
-            mid_scoring.set_value(true);
         }
         
 
@@ -100,16 +100,6 @@ void opcontrol() {
         }
         else{
             instapark.set_value(false);
-        }
-        if(mid_toggle){
-            mid_scoring.set_value(false);
-        }
-        else{
-            mid_scoring.set_value(true);
-        }
-        if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_A)){
-            mid_toggle = !mid_toggle;
-            pros::delay(20);
         }
         if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_B)){
             while(dist.get() > 170){
