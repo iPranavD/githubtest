@@ -14,7 +14,7 @@ pros::Motor bottomrollers(17, pros::MotorGearset::blue);
 
 // Sensors
 
-pros::Imu imu(10);
+pros::Imu imu(21);
 pros::Distance dist(6);
 pros::adi::DigitalOut basket(1);
 pros::adi::DigitalOut scraper(5);
@@ -40,7 +40,7 @@ lemlib::ControllerSettings linearController(15, // proportional gain (kP)
                                             100, // small error range timeout, in milliseconds
                                             3, // large error range, in inches
                                             500, // large error range timeout, in milliseconds
-                                            40 // maximum acceleration (slew)
+                                            60 // maximum acceleration (slew)
 );
 
 // Angular motion controller
@@ -52,7 +52,7 @@ lemlib::ControllerSettings angularController(2, // proportional gain (kP)
                                              100, // small error range timeout, in milliseconds
                                              3, // large error range, in degrees
                                              500, // large error range timeout, in milliseconds
-                                             0 // maximum acceleration (slew)
+                                             60 // maximum acceleration (slew)
 );
 
 // Sensors for odometry

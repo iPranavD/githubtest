@@ -95,6 +95,12 @@ void defaultAuton() {
     setIntakeTop();
     chassis.moveToPose(5, 29, 5, 2000);
     chassis.turnToHeading(135, 2000);
+    chassis.moveToPoint(29, 5, 2000);
+    chassis.turnToHeading(180, 2000);
+    chassis.moveToPoint(29, -3, 2000, {.forwards = false});
+    setHighScoring();
+
+
     
 
   

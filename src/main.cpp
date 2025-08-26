@@ -76,7 +76,7 @@ void opcontrol() {
         // Intake controls with color sorting 
         if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
             setIntakeTop();
-                            mid_scoring.set_value(false);
+                                    mid_scoring.set_value(true);
         }
         else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
             setMidScoring();
@@ -88,10 +88,12 @@ void opcontrol() {
         }
         else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
             setLowScoring();
-                                    mid_scoring.set_value(false);
+                                    mid_scoring.set_value(true);
         }
         else {
             setIdle();
+                                    mid_scoring.set_value(true);
+    
         }
         
 
