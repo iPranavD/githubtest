@@ -71,11 +71,11 @@
             "-funwind-tables",
             "--std=gnu++23",
             "-o",
-            "bin/config.cpp.o",
-            "src/config.cpp"
+            "bin/colorsort.cpp.o",
+            "src/colorsort.cpp"
         ],
         "directory": "/Users/pranavdowluru/Documents/vex-vscode-projects/githubtest",
-        "file": "src/config.cpp"
+        "file": "src/colorsort.cpp"
     },
     {
         "arguments": [
@@ -149,11 +149,11 @@
             "-funwind-tables",
             "--std=gnu++23",
             "-o",
-            "bin/colorsort.cpp.o",
-            "src/colorsort.cpp"
+            "bin/main.cpp.o",
+            "src/main.cpp"
         ],
         "directory": "/Users/pranavdowluru/Documents/vex-vscode-projects/githubtest",
-        "file": "src/colorsort.cpp"
+        "file": "src/main.cpp"
     },
     {
         "arguments": [
@@ -188,10 +188,10 @@
             "-funwind-tables",
             "--std=gnu++23",
             "-o",
-            "bin/main.cpp.o",
-            "src/main.cpp"
+            "bin/config.cpp.o",
+            "src/config.cpp"
         ],
         "directory": "/Users/pranavdowluru/Documents/vex-vscode-projects/githubtest",
-        "file": "src/main.cpp"
+        "file": "src/config.cpp"
     }
 ]
