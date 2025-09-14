@@ -98,6 +98,7 @@ void initializeHardware() {
 }
 void setIntakeTop() {
     bottomrollers.move_velocity(600);
+    toprollers.move_velocity(0);
 }
 
 void setMidScoring() {
@@ -118,6 +119,8 @@ void setLowScoring() {
 void setIdle() {
     bottomrollers.move_velocity(0);
     toprollers.move_velocity(0);
+    mid_scoring.set_value(true);
+
 }
 /**
  * Runs initialization code. This occurs as soon as the program is started.
@@ -180,53 +183,64 @@ void competition_initialize() {}
 
  void right5() {
     setIntakeTop();
-    chassis.moveToPoint(4.23, 38, 2000, {.maxSpeed = 40});
+    chassis.moveToPoint(5.5, 38, 2000, {.maxSpeed = 40});
     chassis.waitUntilDone();
-    chassis.moveToPose(28, 48, 65, 2000, {.maxSpeed = 40});
+    // chassis.moveToPose(-28, 48, -65, 2000, {.maxSpeed = 40});
+    // chassis.waitUntilDone();
+    // scraper.set_value(true);
+    // pros::delay(500);
+    // chassis.moveToPoint(-5, 31, 2000, {.forwards = false});
     chassis.waitUntilDone();
-    scraper.set_value(true);
-    pros::delay(500);
-    chassis.moveToPoint(5, 31, 2000, {.forwards = false});
-    chassis.waitUntilDone();
-    chassis.turnToHeading(105, 2000);
-    chassis.moveToPoint(35, 10, 2000);
+    chassis.turnToHeading(135, 2000);
+    chassis.moveToPoint(36, 9, 2000);
     scraper.set_value(false);
     chassis.turnToHeading(180, 2000);
-    chassis.moveToPoint(37, 34, 2000, {.forwards = false, .maxSpeed = 100});
+    chassis.moveToPoint(36, 34, 2000, {.forwards = false, .maxSpeed = 70});
     chassis.waitUntilDone();
     setHighScoring();
     mid_scoring.set_value(false);
     pros::delay(3260);
-    chassis.moveToPoint(37, 10, 2000, {.maxSpeed = 75});
+    setIntakeTop();
+    scraper.set_value(true);
+    chassis.moveToPoint(36, -7, 2000, {.maxSpeed = 600});
     chassis.waitUntilDone();
-    mid_scoring.set_value(true);
-    chassis.moveToPoint(37, 50, 2000, {.forwards = false, .maxSpeed = 999});
+    pros::delay(150);
+    scraper.set_value(false);
+    chassis.moveToPoint(36, 34, 2000, {.forwards = false, .maxSpeed = 60});
+    chassis.waitUntilDone();
+    setHighScoring();
 }
 
 void left5(){
     setIntakeTop();
     chassis.moveToPoint(-5.2, 38, 2000, {.maxSpeed = 40});
     chassis.waitUntilDone();
-    chassis.moveToPose(-28, 48, -65, 2000, {.maxSpeed = 40});
+    // chassis.moveToPose(-28, 48, -65, 2000, {.maxSpeed = 40});
+    // chassis.waitUntilDone();
+    // scraper.set_value(true);
+    // pros::delay(500);
+    // chassis.moveToPoint(-5, 31, 2000, {.forwards = false});
     chassis.waitUntilDone();
-    scraper.set_value(true);
-    pros::delay(500);
-    chassis.moveToPoint(-5, 31, 2000, {.forwards = false});
-    chassis.waitUntilDone();
-    chassis.turnToHeading(-105, 2000);
-    chassis.moveToPoint(-35, 10, 2000);
+    chassis.turnToHeading(-135, 2000);
+    chassis.moveToPoint(-36, 9, 2000);
     scraper.set_value(false);
     chassis.turnToHeading(180, 2000);
-    chassis.moveToPoint(-37, 34, 2000, {.forwards = false, .maxSpeed = 70});
+    chassis.moveToPoint(-36, 34, 2000, {.forwards = false, .maxSpeed = 70});
     chassis.waitUntilDone();
     setHighScoring();
     mid_scoring.set_value(false);
     pros::delay(3260);
-    chassis.moveToPoint(-37, 10, 2000, {.maxSpeed = 20});
+    setIntakeTop();
+    scraper.set_value(true);
+    chassis.moveToPoint(-36, -7, 2000, {.maxSpeed = 360});
     chassis.waitUntilDone();
-    mid_scoring.set_value(true);
-    chassis.moveToPoint(-37, 40, 2000, {.forwards = false, .maxSpeed = 999});
+    pros::delay(150);
+    scraper.set_value(false);
+    chassis.moveToPoint(-36, 34, 2000, {.forwards = false, .maxSpeed = 60});
+    chassis.waitUntilDone();
+    setHighScoring();
 }
+
 void skills(){
     chassis.setPose(-58.387,-14.844, 90);
     setIntakeTop();
@@ -275,47 +289,66 @@ void skills(){
 
 }
 void skills2(){
-   chassis.setPose(0, 0, 0);
+    chassis.setPose(0, 0, 0);
     setIntakeTop();
-    chassis.moveToPoint(6, 38, 2000, {.maxSpeed = 40});
+    chassis.moveToPoint(6, 40, 2000, {.maxSpeed = 40});
     chassis.waitUntilDone();
-    chassis.moveToPose(35, 57.5, 90, 2000, {.maxSpeed = 40});
-    chassis.waitUntilDone();
-    pros::delay(500);
-    chassis.moveToPoint(5, 31, 2000, {.forwards = false});
-    chassis.waitUntilDone();
-    chassis.turnToHeading(105, 2000);
-    chassis.moveToPoint(38, 10, 2000);
-    scraper.set_value(false);
+    chassis.turnToHeading(125, 2000);
+    chassis.moveToPoint(37, 10, 2000);
     chassis.turnToHeading(180, 2000);
-    chassis.moveToPoint(39, 34, 2000, {.forwards = false, .maxSpeed = 100});
+    chassis.moveToPoint(36.7, 34, 2000, {.forwards = false, .maxSpeed = 100});
     chassis.waitUntilDone();
-    setHighScoring();
-    setLowScoring();
-    pros::delay(60);
     setHighScoring();
     mid_scoring.set_value(false);
-    chassis.moveToPoint(39, 25, 2000);
-    chassis.moveToPoint(39, 34, 2000, {.forwards = false, .maxSpeed = 100});
-    setHighScoring();
-    pros::delay(3260);
-    scraper.set_value(true);
-    setIntakeTop();
-    chassis.moveToPoint(39, -5, 2000, {.maxSpeed = 67});
-    chassis.waitUntilDone();
-    pros::delay(3000);
-    chassis.moveToPoint(39, 34, 2000, {.forwards = false, .maxSpeed = 100});
-    chassis.waitUntilDone();
     setLowScoring();
     pros::delay(100);
     setHighScoring();
-    
+    pros::delay(3300);
+    scraper.set_value(true);
+    setIntakeTop();
+    chassis.moveToPoint(36, -8, 2000, {.maxSpeed = 999});
+    chassis.waitUntilDone();
+    pros::delay(3000);
+    chassis.moveToPoint(36.7, 34, 2000, {.forwards = false, .maxSpeed = 100});
+    chassis.waitUntilDone();
+    setHighScoring();
+    setLowScoring();
+    pros::delay(300);
+    setHighScoring();
+    pros::delay(3600);
+    scraper.set_value(false);
+    chassis.moveToPoint(37.5, 19, 1000);
+    chassis.turnToHeading(-90, 1000);
+    setIntakeTop();
+    chassis.moveToPoint(-40, 23, 2000);
+    chassis.waitUntilDone();
+    chassis.moveToPoint(-63, 5, 2000);
+    chassis.turnToHeading(180, 1000);
+    chassis.moveToPoint(-63, 34, 2000, {.forwards = false});
+    chassis.waitUntilDone();
+    setHighScoring();
+    pros::delay(3300);
+    scraper.set_value(true);
+    setIntakeTop();
+    chassis.moveToPoint(-62, -7.5, 2000, {.maxSpeed = 999});
+    chassis.waitUntilDone();
+    pros::delay(1000);
+    chassis.moveToPoint(-63, 34, 2000, {.forwards = false, .maxSpeed = 70});
+    chassis.waitUntilDone();
+    setHighScoring();
+    pros::delay(3300);
+    scraper.set_value(false);
+    chassis.moveToPoint(-9.25, 19, 2500, {.maxSpeed = 70});
+    chassis.turnToHeading(180, 2000);
+    chassis.moveToPoint(-9.25, -8, 2000);
+    setLowScoring();
 }
     
 
 void autonomous() {
     //right5();
-    skills2();
+    //skills2();
+    left5();
 }
 
 
@@ -339,7 +372,7 @@ void opcontrol() {
     // Loop forever
     while (true) {
         bool park_toggle = false;
-        bool scraper_toggle = false;
+        static bool scraper_toggle {false};
         bool hood_toggle = false;
         const int lateral_power = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y); 
         const int linear_power = controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X); 
@@ -360,7 +393,7 @@ void opcontrol() {
             setHighScoring();
                     mid_scoring.set_value(false);
         }
-        else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
+        else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) { 
             setLowScoring();
                                     mid_scoring.set_value(true);
         }
@@ -368,16 +401,16 @@ void opcontrol() {
             setIdle();
                                     mid_scoring.set_value(true);
         }
-        if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP)){
+        if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_DOWN)){
             scraper_toggle = !scraper_toggle;
-            scraper.set_value(scraper_toggle);
-            pros::delay(20);
         }
-        if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)){
-            hood_toggle = !hood_toggle;
-            mid_scoring.set_value(hood_toggle);
-            pros::delay(20);
+        if (scraper_toggle){
+            scraper.set_value(true);
         }
+        else if (!scraper_toggle) {
+            scraper.set_value(false);
+        }
+    
         // Color mode toggle
         // Delay to save resources
         pros::delay(25);
