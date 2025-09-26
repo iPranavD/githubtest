@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "left67",
+    "project_name": "right67",
     "target": "v5",
     "templates": {
       "LemLib": {
@@ -637,7 +637,7 @@
     "upload_options": {
       "icon": "X",
       "description": "lol XD",
-      "slot": 5
+      "slot": 8
     },
     "use_early_access": false
   }
